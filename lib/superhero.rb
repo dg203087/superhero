@@ -1,6 +1,8 @@
-require "superhero/version"
+#This is the environment file
+# require 'json'
+# require 'rest-client'
+require 'pry'
 
-module Superhero
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative './superhero/version'
+require_relative './superhero/hero'
+require_relative './superhero/cli'
