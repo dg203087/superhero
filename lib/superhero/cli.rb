@@ -2,37 +2,39 @@
 class Superhero::CLI  
 
     def call
-        list_superheroes
+        puts "Welcome to Superhero Finder!"
+        puts "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*"
         menu
+        get_superheroes
         goodbye
     end
 
-    def list_superheroes #will really GET deals when using API
-        puts "Welcome Superheroes!" 
-        @superheroes = Superhero::Hero.shazam
-        @superheroes.each_with_index(1) do |hero, i|
-            puts "#{i}. #{hero.name}"
+    def menu
+        puts "Enter the name of the superhero you'd like to learn about." 
+        puts "For a list of superheros by letter, type list."
+        puts "Type exit to leave."
+        
+        while input != "exit"
+            Superhero::API.query_superhero_db(input)
+            get_superheroes
+        elsif input == "list"
+            list_superheroes_by_letter
+        else
+            puts "I don't know that superhero, try again."
+            puts "For a list of superheros by letter, type list."
+            puts "Type exit to leave."
         end
     end
 
-    def menu
-        input = nil
-        while input != "exit"
-            puts "Enter the number of the superhero you'd like to learn about. 
-            Type list to see the names again. Type exit to leave."
-            input = gets.strip
+    def get_superheroes #will really GET superheroes when using API
+        @superheroes = Superhero::Hero.shazam
+        # @superheroes.each_with_index(1) do |hero, i|
+        #     puts "#{i}. #{hero.name}"
+        # end
+    end
 
-            # Superhero::API.query_superhero_db(input)
-            
-            if input.to_i > 0 
-                the_hero = @superheroes[input.to_i - 1]
-                puts "#{the_hero.name} - #{the_hero.power} - #{the_hero.appearance}"
-            elsif input == "list"
-                list_superheroes
-            else
-                puts "Not sure what you want, type list or exit."
-            end
-        end
+    def list_superheroes_by_letter
+        @list = Superhero::Hero.list_superheroes
     end
 
     def goodbye
