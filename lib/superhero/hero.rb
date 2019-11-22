@@ -4,10 +4,7 @@ class Superhero::Hero
     def self.shazam
         #should return a bunch of instances of HEROES
         puts <<-DOC
-            1. Batman
-            2. Captain Marvel
-            3. Batwoman
-            4. Ant Man
+            This is where I will sort a hash of superhero information.
         DOC
     # hero1 = self.new
     # hero1.name = "Batman"
@@ -22,8 +19,10 @@ class Superhero::Hero
     # hero2.bio = "alien"
 
     # [hero1, hero2]
-        
     end
 
+    def self.list_superheroes
+
+    end
 
 end
