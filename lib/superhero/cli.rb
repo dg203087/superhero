@@ -5,36 +5,45 @@ class Superhero::CLI
         puts "Welcome to Superhero Finder!"
         puts "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*"
         menu
-        get_superheroes
         goodbye
     end
 
     def menu
         puts "Enter the name of the superhero you'd like to learn about." 
-        puts "For a list of superheros by letter, type list."
         puts "Type exit to leave."
-        
-        while input != "exit"
-            Superhero::API.query_superhero_db(input)
-            get_superheroes
+        input = gets.strip
+            
+        if input != nil #find a match in the API
+            Superhero::API.query_superhero_db(input) 
+            @attribute = Superhero::Hero.find_by_index(input.to_i - 1)
+            display_info
         elsif input == "list"
-            list_superheroes_by_letter
-        else
-            puts "I don't know that superhero, try again."
-            puts "For a list of superheros by letter, type list."
-            puts "Type exit to leave."
+                list_superheroes_by_letter
+        else 
+                puts "I don't know that superhero, try again."
+                puts "Type exit to leave."
         end
     end
 
-    def get_superheroes #will really GET superheroes when using API
-        @superheroes = Superhero::Hero.shazam
-        # @superheroes.each_with_index(1) do |hero, i|
-        #     puts "#{i}. #{hero.name}"
-        # end
+    def display_info 
+        puts ""
+        puts "----------- Profile -----------"
+        puts ""
+        puts "Full Name:           #{@attribute.full_name}"
+        puts "Race:                #{@attribute.race}"
+        puts "Alignment:           #{@attribute.alignment}"
+        puts "Home Base:           #{@attribute.home_base}"   
     end
 
-    def list_superheroes_by_letter
-        @list = Superhero::Hero.list_superheroes
+    def list_superheroes_by_letter(letter)
+        puts "Enter the first letter of the superhero you're looking for:"
+        
+        # case letter = gets.strip.downcase
+        #   when "a"
+        #     puts Superhero::
+
+
+        # @list = Superhero::Hero.list_superheroes
     end
 
     def goodbye
