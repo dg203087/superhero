@@ -5,6 +5,11 @@ class Superhero::Hero
 
     @@all = []
 
+    def self.new_from_index(shero)
+        self.new(
+
+      end
+
     def initialize(full_name, race, alignment, home_base, publisher, intelligence, 
         strength, speed, durability, power, combat)
         @full_name = full_name
