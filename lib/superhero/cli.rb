@@ -5,10 +5,14 @@ class Superhero::CLI
         puts " Welcome to Superhero Finder!"
         puts "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*"
         puts ""
+        popular_list
+        menu
+    end
+
+    def popular_list
         puts "   Popular Superheroes List"
         puts "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*"
         Superhero::API.new.popular_superheroes
-        menu
     end
 
     def menu
@@ -17,9 +21,7 @@ class Superhero::CLI
         puts "Or you can type exit to leave."
         input = gets.strip
             
-        if input == "exit"
-            goodbye
-        elsif input != nil         #.valid? == true #find a match in the API
+        if input != nil
             Superhero::API.query_superhero_db(input) 
             @attribute = Superhero::Hero.find_by_index(input.to_i - 1) 
             #instance variable set equal all initialized objects to be called below
@@ -37,8 +39,10 @@ class Superhero::CLI
                 puts ""
                 menu
             end
-        # elsif input == "list"
-        #     list_superheroes_by_letter
+        elsif input == "list"
+            popular_list
+        elsif input == "exit"
+            goodbye
         else 
             puts "I don't know that superhero, try again."
             puts "Type exit to leave."
@@ -63,17 +67,6 @@ class Superhero::CLI
         puts "Power:               #{@attribute.power}"
         puts "Combat:              #{@attribute.combat}"
         puts ""
-    end
-
-    def list_superheroes_by_letter(letter)
-        puts "Enter the first letter of the superhero you're looking for:"
-        
-        # case letter = gets.strip.downcase
-        #   when "a"
-        #     puts Superhero::
-
-
-        # @list = Superhero::Hero.list_superheroes
     end
 
     def goodbye
