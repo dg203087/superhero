@@ -4,12 +4,16 @@ class Superhero::CLI
     def call
         puts "Welcome to Superhero Finder!"
         puts "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*"
+        puts "Popular Superheroes"
+        puts "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*"
+        Superhero::API.new.popular_superheroes
         menu
     end
 
     def menu
-        puts "Enter the name of the superhero you'd like to learn about:" 
-        puts "Type exit to leave."
+        puts "Enter the name of the superhero from the list you'd like to learn about:" 
+        puts "Type 'list' to see the list again."
+        puts "Or you can type exit to leave."
         input = gets.strip
             
         if input == "exit"
