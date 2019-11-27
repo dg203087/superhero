@@ -3,6 +3,13 @@ class Superhero::API
     ACCESS_TOKEN = "814865975490"
     #should be saved in an environment and not hard coded
 
+    def popular_superheroes
+        scrape_restaurants_index.each do |shero|
+            Superheroes::Hero.new_from_index(shero)
+        end
+    #common superheroes methoed utilizes array - iterates and passes name through 
+    end
+
     def self.query_superhero_db(input)
         input = input.downcase.tr(" ","_") #make URL friendly parameterize
         results = HTTParty.get("#{BASE_URL}#{ACCESS_TOKEN}/search/#{input}")
