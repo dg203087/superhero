@@ -2,9 +2,10 @@
 class Superhero::CLI  
 
     def call
-        puts "Welcome to Superhero Finder!"
+        puts " Welcome to Superhero Finder!"
         puts "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*"
-        puts "Popular Superheroes"
+        puts ""
+        puts "   Popular Superheroes List"
         puts "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*"
         Superhero::API.new.popular_superheroes
         menu
