@@ -4,10 +4,14 @@ class Superhero::API
     #should be saved in an environment and not hard coded
 
     def popular_superheroes
-        scrape_restaurants_index.each do |shero|
-            Superheroes::Hero.new_from_index(shero)
+        popular_names = ["Batman", "Batwoman", "Beast", "Black_Widow", "Captain_America", 
+        "Captain_Marvel", "Catwoman", "Deadpool", "Flash", "Harley_Quinn", "Hawkeye", 
+        "Iron_Man", "Jessica_Jones", "Nebula", "Night_Crawler", "Quicksilver", "Robin", 
+        "Rogue", "Spider Man", "Superman", "Valkyrie", "Winter_Soldier", "Wonder_Woman", 
+        "Wolverine", "Yoda"]
+        popular_names.each do |hero|
+            puts hero.gsub('_', ' ')
         end
-    #common superheroes methoed utilizes array - iterates and passes name through 
     end
 
     def self.query_superhero_db(input)
