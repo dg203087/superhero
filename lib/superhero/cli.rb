@@ -2,10 +2,10 @@
 class Superhero::CLI  
 
     def call
+        Superhero::API.create_popular_superheroes
         puts " Welcome to Superhero Finder!"
         puts "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*"
         puts ""
-        Superhero::API.new.popular_superheroes
         list_superheroes
         menu
     end
@@ -13,22 +13,22 @@ class Superhero::CLI
     def list_superheroes
         puts "   Popular Superheroes List"
         puts "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*"
-        list = Superhero::Hero.find_by_index(input.to_i - 1) 
-        puts list.name
+        Superhero::Hero.all.each.with_index(1) do |hero_name, i| #iterates over @@all array
+            puts "#{i}. #{hero_name.name.gsub('_', ' ')}"
+        end
     end
 
     def menu
         puts ""
-        puts "Enter the name of the superhero from the list you'd like to learn about:" 
+        puts "Enter the number of the superhero from the list you'd like to learn more about:" 
         puts "Type 'list' to see the list again."
         puts "Or you can type exit to leave."
         input = gets.strip
             
         if input == "exit"
             goodbye
-        elsif input != nil
-            # Superhero::API.query_superhero_db(input) 
-            @attribute = Superhero::Hero.find_by_index(input.to_i - 1) 
+        elsif input > 0 && input < 25 
+            @attribute = Superhero::Hero.all[input.to_i]
             #instance variable set equal all initialized objects to be called below
             display_info
 
@@ -50,6 +50,7 @@ class Superhero::CLI
         else 
             puts "I don't know that superhero, try again."
             puts "Type exit to leave."
+            #call menu?
         end
     end
 
