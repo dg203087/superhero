@@ -4,18 +4,18 @@ class Superhero::API
     #should be saved in an environment and not hard coded
 
     def self.create_popular_superheroes
-        popular_names = [70, 73, 75, 107, 149, 156, 165, 213, 263, 309, 313, 346, 361, 
-        487, 490, 536, 561, 567, 621, 644, 684, 714, 720, 717, 729]
-        # popular_names = ["Batman", "Batwoman", "Beast", "Black_Widow", "Captain_America", 
-        # "Captain_Marvel", "Catwoman", "Deadpool", "Flash", "Harley_Quinn", "Hawkeye", 
-        # "Iron_Man", "Jessica_Jones", "Nebula", "Quicksilver", "Robin", 
-        # "Rogue", "Spider-Man", "Superman", "Valkyrie", "Winter_Soldier", "Wonder_Woman", 
-        # "Wolverine", "Yoda"]
+        # popular_ids = ["70", "73", "75", "107", "149", "156", "165", "213", "263", "309", "313", "346", "361", 
+        # "487", "490", "536", "561", "567", "621", "644", "684", "714", "720", "717", "729"]
+        popular_ids = ["Batman", "Batwoman", "Beast", "Black_Widow", "Captain_America", 
+        "Captain_Marvel", "Catwoman", "Deadpool", "Flash", "Harley_Quinn", "Hawkeye", 
+        "Iron_Man", "Jessica_Jones", "Nebula", "Quicksilver", "Robin", 
+        "Rogue", "Spider-Man", "Superman", "Valkyrie", "Winter_Soldier", "Wonder_Woman", 
+        "Wolverine", "Yoda"]
 
-        popular_names.each do |hero_id|
-            results = HTTParty.get("#{BASE_URL}#{ACCESS_TOKEN}/#{hero_id}")
-            # if results.has_key?()
-    
+        popular_ids.each do |hero_id|
+            results = HTTParty.get("#{BASE_URL}#{ACCESS_TOKEN}/search/#{hero_id}")
+            # if results.has_key?("results")
+            
             results["results"].each do |attribute|
                 name = attribute["name"]
                 full_name = attribute["biography"]["full-name"]
@@ -29,7 +29,7 @@ class Superhero::API
                 durability = attribute["powerstats"]["durability"]
                 power = attribute["powerstats"]["power"]
                 combat = attribute["powerstats"]["combat"]
-            
+                
                 Superhero::Hero.new(name, full_name, race, alignment, home_base, publisher, intelligence, 
                 strength, speed, durability, power, combat)
             end
