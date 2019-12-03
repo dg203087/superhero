@@ -2,10 +2,10 @@
 class Superhero::CLI  
 
     def call
-        Superhero::API.create_popular_superheroes
         puts " Welcome to Superhero Finder!"
         puts "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*"
         puts ""
+        Superhero::API.create_popular_superheroes
         list_superheroes
         menu
     end
@@ -27,8 +27,13 @@ class Superhero::CLI
             
         if input == "exit"
             goodbye
-        elsif input > 0 && input < 25 
-            @attribute = Superhero::Hero.all[input.to_i]
+
+        elsif input == "list"
+            list_superheroes
+            menu
+
+        elsif input.to_i >= 1 && input.to_i <= 25 
+            @attribute = Superhero::Hero.all[input.to_i - 1]
             #instance variable set equal all initialized objects to be called below
             display_info
 
@@ -44,18 +49,15 @@ class Superhero::CLI
                 puts ""
                 menu
             end
-
-        elsif input == "list"
-            popular_list
         else 
             puts "I don't know that superhero, try again."
-            puts "Type exit to leave."
-            #call menu?
+            puts "Or type exit to leave."
+            menu
         end
     end
 
     def display_info 
-        puts "------------- Profile -------------"
+        puts "------------- #{@attribute.name}'s Profile -------------"
         puts ""
         puts "Full Name:           #{@attribute.full_name}"
         puts "Race:                #{@attribute.race}"
@@ -63,7 +65,7 @@ class Superhero::CLI
         puts "Home Base:           #{@attribute.home_base}"
         puts "Publisher:           #{@attribute.publisher}"
         puts ""
-        puts "----------- Power Stats -----------"
+        puts "---------------- Power Stats ----------------"
         puts ""
         puts "Intelligence:        #{@attribute.intelligence}"
         puts "Strength:            #{@attribute.strength}"
