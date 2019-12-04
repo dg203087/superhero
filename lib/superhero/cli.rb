@@ -1,4 +1,3 @@
-#CLI Controller responsible for user interactions
 class Superhero::CLI  
 
     def call
