@@ -7,7 +7,7 @@ class Superhero::API
 
         popular_ids.each do |hero_id|
             results = HTTParty.get("#{BASE_URL}#{ACCESS_TOKEN}/#{hero_id}")
-        
+            binding.pry
             name = results["name"]
             full_name = results["biography"]["full-name"]
             race = results["appearance"]["race"]
@@ -25,26 +25,4 @@ class Superhero::API
             strength, speed, durability, power, combat)
         end 
     end
-
-    # def self.query_superhero_db(input)
-    #     input = input.downcase.tr(" ","_") #make URL friendly parameterize
-    #     results = HTTParty.get("#{BASE_URL}#{ACCESS_TOKEN}/search/#{input}")
-        
-    #     results["results"].each do |attribute|
-    #         name = ["name"]
-    #         full_name = attribute["biography"]["full-name"]
-    #         race = attribute["appearance"]["race"]
-    #         alignment = attribute["biography"]["alignment"]
-    #         home_base = attribute["work"]["base"]
-    #         publisher = attribute["biography"]["publisher"]
-    #         intelligence = attribute["powerstats"]["intelligence"]
-    #         strength = attribute["powerstats"]["strength"]
-    #         speed = attribute["powerstats"]["speed"]
-    #         durability = attribute["powerstats"]["durability"]
-    #         power = attribute["powerstats"]["power"]
-    #         combat = attribute["powerstats"]["combat"]
-    #         Superhero::Hero.new(hero_name, full_name, race, alignment, home_base, publisher, intelligence, 
-    #         strength, speed, durability, power, combat)
-    #     end  
-    # end
 end
