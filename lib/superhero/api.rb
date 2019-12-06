@@ -7,7 +7,7 @@ class Superhero::API
 
         popular_ids.each do |hero_id|
             results = HTTParty.get("#{BASE_URL}#{ACCESS_TOKEN}/#{hero_id}")
-            binding.pry
+            
             name = results["name"]
             full_name = results["biography"]["full-name"]
             race = results["appearance"]["race"]
@@ -24,5 +24,27 @@ class Superhero::API
             Superhero::Hero.new(name, full_name, race, alignment, home_base, publisher, intelligence, 
             strength, speed, durability, power, combat)
         end 
+    end
+
+    def self.create_alpha_list(ids)
+        ids.each do |id|
+            results = HTTParty.get("#{BASE_URL}#{ACCESS_TOKEN}/#{id}")
+        
+            name = results["name"]
+            full_name = results["biography"]["full-name"]
+            race = results["appearance"]["race"]
+            alignment = results["biography"]["alignment"]
+            home_base = results["work"]["base"]
+            publisher = results["biography"]["publisher"]
+            intelligence = results["powerstats"]["intelligence"]
+            strength = results["powerstats"]["strength"]
+            speed = results["powerstats"]["speed"]
+            durability = results["powerstats"]["durability"]
+            power = results["powerstats"]["power"]
+            combat = results["powerstats"]["combat"]
+        
+            Superhero::Hero.new(name, full_name, race, alignment, home_base, publisher, intelligence, 
+            strength, speed, durability, power, combat)
+        end
     end
 end
