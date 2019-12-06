@@ -72,7 +72,7 @@ class Superhero::CLI
         if letter == "exit"
             goodbye
         elsif ("a".."z").include?(letter)
-            puts "      Superheroes & Villians: The #{letter.upcase} List"
+            puts "      Superheroes & Villains: The #{letter.upcase} List"
             puts "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*"
             case letter
             when "a"
