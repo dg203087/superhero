@@ -35,7 +35,7 @@ class Superhero::CLI
         Superhero::API.create_popular_superheroes
         puts "   Popular Superheroes List"
         puts "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*"
-        Superhero::Hero.all.each.with_index(1) do |hero_name, i| #iterates over @@all array
+        Superhero::Hero.all.each.with_index(1) do |hero_name, i|
             puts "#{i}. #{hero_name.name.gsub('_', ' ')}"
         end
         search_from_popular_list
@@ -49,7 +49,6 @@ class Superhero::CLI
 
         if input.to_i >= 1 && input.to_i <= 25 
             @attribute = Superhero::Hero.all[input.to_i - 1]
-            #instance variable set equal all initialized objects to be called below
             display_info
             again?
         elsif input == "menu"
